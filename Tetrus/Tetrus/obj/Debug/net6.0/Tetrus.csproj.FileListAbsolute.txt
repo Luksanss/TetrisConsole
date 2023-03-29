@@ -1,0 +1,15 @@
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\bin\Debug\net6.0\Tetrus.exe
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\bin\Debug\net6.0\Tetrus.deps.json
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\bin\Debug\net6.0\Tetrus.runtimeconfig.json
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\bin\Debug\net6.0\Tetrus.dll
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\bin\Debug\net6.0\Tetrus.pdb
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.csproj.AssemblyReference.cache
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.AssemblyInfoInputs.cache
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.AssemblyInfo.cs
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.csproj.CoreCompileInputs.cache
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.dll
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\refint\Tetrus.dll
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.pdb
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\Tetrus.genruntimeconfig.cache
+C:\Users\Lukas\Documents\GitHub\TetrisConsole\Tetrus\Tetrus\obj\Debug\net6.0\ref\Tetrus.dll

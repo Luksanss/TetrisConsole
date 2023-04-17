@@ -121,7 +121,6 @@ namespace Tetris
         }
     }
 
-    
 
     public class GameGrid
     {
@@ -243,6 +242,35 @@ namespace Tetris
                 }
                 y += 1;
             }
+        }
+    }
+
+    public class Position
+    {
+        public int Row { get; set; }
+        public int Column { get; set; }
+
+        public Position(int r, int c)
+        {
+            Row = r;
+            Column = c;
+        }
+    }
+
+    public abstract class Block
+    {
+        protected abstract Position[][] Tiles { get; set; }
+        protected abstract Position StartOffset { get; set;  }
+        public abstract int Id { get; }
+
+        // to choose from Tiles
+        private int rotationState;
+        private Position offset;
+
+        public Block()
+        {
+            offset = new Position(StartOffset.Row, StartOffset.Column);
+            rotationState = 0;
         }
     }
 }

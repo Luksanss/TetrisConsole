@@ -88,7 +88,7 @@ namespace Tetris
             }
         }
 
-        private bool IsGameOver()
+        public bool IsGameOver()
         {
             // top two rows must be empty
             return !(GameGrid.RowIsEmpty(0) && GameGrid.RowIsEmpty(1));

@@ -11,51 +11,83 @@ namespace Tetris
         {
             // game params
             Console.CursorVisible = false;
-            var GameGrid = new GameGrid(20,12);
 
             // start menu
             MenuStart();
 
             var game = new GameState();
+            int scoreF = 0;
 
-            while (true)
+            while (!game.IsGameOver())
             {
                 Print(game);
-
+                Thread.Sleep(500);
                 if (Console.KeyAvailable)
                 {
-                    ConsoleKey keyPressed = Console.ReadKey(true).Key;
-                    if (keyPressed == ConsoleKey.LeftArrow)
+                    ConsoleKeyInfo keyPressed =  Console.ReadKey(true);
+                    if (keyPressed.Key == ConsoleKey.LeftArrow)
                     {
                         game.MoveBlockLeft();
                     }
-                    else if (keyPressed == ConsoleKey.RightArrow)
+                    else if (keyPressed.Key == ConsoleKey.RightArrow)
                     {
                         game.MoveBlockRight();
                     }
-                    else if (keyPressed == ConsoleKey.DownArrow)
+                    else if (keyPressed.Key == ConsoleKey.DownArrow)
                     {
                         game.MoveBlockDown();
                     }
-                    else if (keyPressed == ConsoleKey.R)
+                    else if (keyPressed.Key == ConsoleKey.R)
                     {
                         game.RotateBlockCW();
                     }
-                    else if (keyPressed == ConsoleKey.T)
+                    else if (keyPressed.Key == ConsoleKey.T)
                     {
                         game.RotateBlockCCW();
                     }
                 }
+                while (Console.KeyAvailable)
+                    Console.ReadKey(false);
                 game.MoveBlockDown();
-
-                
+                scoreF = game.GameGrid.score;
+                Console.WriteLine($"     Score: {scoreF}");
             }
-
-            Console.ReadKey();
+            Console.WriteLine($"Game over, final score {scoreF}");
         }
 
-
-        public static void PrintGrid(GameGrid gameGrid)
+        public static void setRed() 
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+        public static void setYellow()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+        }
+        public static void setGreen()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+        }
+        public static void setBlue()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+        }
+        public static void setMagenta()
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+        }
+        public static void setCyan()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+        }
+        public static void setDarkGray()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+        }
+        public static void setDarkYellow()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+        }
+        public static void PrintGrid(int[,] gameGrid)
         {
             int height = 60;
             int width = 160;
@@ -68,14 +100,46 @@ namespace Tetris
             {
                 // haha
             }
-            int x = (Console.WindowWidth) / 2 - gameGrid.Rows;
-            int y = (Console.WindowHeight) / 2 - gameGrid.Columns;
+            int x = (Console.WindowWidth) / 2 - gameGrid.GetLength(0);
+            int y = (Console.WindowHeight) / 2 - gameGrid.GetLength(1);
 
-            for (int r = 0; r < gameGrid.Rows; r++)
+            for (int r = 0; r < gameGrid.GetLength(0); r++)
             {
                 Console.SetCursorPosition(x, y);
-                for (int c = 0; c < gameGrid.Columns; c++)
+                for (int c = 0; c < gameGrid.GetLength(1); c++)
                 {
+                    if (gameGrid[r, c] == 0)
+                    {
+                        setRed();
+                    }
+                    if (gameGrid[r, c] == 1)
+                    {
+                        setYellow();
+                    }
+                    if (gameGrid[r, c] == 2)
+                    {
+                        setGreen();
+                    }
+                    if (gameGrid[r, c] == 3)
+                    {
+                        setCyan();
+                    }
+                    if (gameGrid[r, c] == 4)
+                    {
+                        setDarkGray();
+                    }
+                    if (gameGrid[r, c] == 5)
+                    {
+                        setDarkYellow();
+                    }
+                    if (gameGrid[r, c] == 6)
+                    {
+                        setBlue();
+                    }
+                    if (gameGrid[r, c] == 7)
+                    {
+                        setMagenta();
+                    }
                     Console.Write($" {gameGrid[r, c]} ");
                 }
                 y += 1;
@@ -83,17 +147,26 @@ namespace Tetris
         }
         public static void PrintBlock(Block block, GameGrid gameGrid)
         {
+            int[,] pos = new int[gameGrid.Rows, gameGrid.Columns];
+
+            for (int i = 0; i < gameGrid.Columns; i++)
+            {
+                for (int n = 0; n < gameGrid.Rows; n++)
+                {
+                    pos[n, i] = gameGrid[n, i];
+                }
+            }
+
             foreach (Position p in block.TilePositions())
             {
-                gameGrid[p.Row, p.Column] = block.Id;
+                pos[p.Row, p.Column] = block.Id;
             }
-            PrintGrid(gameGrid);
+            PrintGrid(pos);
         }
 
         public static void Print(GameState gameState)
         {
             PrintBlock(gameState.CurBlock, gameState.GameGrid);
-            PrintGrid(gameState.GameGrid);
         }
 
         static void MenuStart()

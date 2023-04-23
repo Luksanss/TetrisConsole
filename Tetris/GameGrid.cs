@@ -14,6 +14,7 @@ namespace Tetris
             get => grid[r, c];
             set => grid[r, c] = value;
         }
+        public int score = 0;
 
         public GameGrid(int rows, int columns)
         {
@@ -67,7 +68,8 @@ namespace Tetris
             for (int i = 0; i < Columns; i++)
             {
                 grid[r, i] = 0;
-            } 
+            }
+            score += 100;
         }
 
         private void MoveRowDown(int r, int NumberOfRows)
@@ -102,33 +104,6 @@ namespace Tetris
                 }
             }
             return cleared;
-        }
-
-        public void PrintGrid()
-        {
-            int height = 60;
-            int width = 160;
-            // if operating system is Windows
-            if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                Console.SetWindowSize(width, height);
-            }
-            else
-            {
-                // haha
-            }
-            int x = (Console.WindowWidth) / 2 - Rows;
-            int y = (Console.WindowHeight) / 2 - Columns;
-
-            for (int r = 0; r < Rows; r++)
-            {
-                Console.SetCursorPosition(x, y);
-                for (int c = 0; c < Columns; c++)
-                {
-                    Console.Write($" {grid[r, c]} ");
-                }
-                y += 1;
-            }
         }
     }
 }

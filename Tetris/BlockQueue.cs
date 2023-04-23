@@ -28,14 +28,12 @@
             return blocks[pickABlock.Next(0, blocks.Length)];
         }
 
-        public Block GetAndRandomBlock()
+        public Block GetARandomBlock()
         {
-            Block block = NextBlock;
-
-            // get a new block
+            // get a new block, can be the same it was before
             NextBlock = RandomBlock();
 
-            return block;
+            return NextBlock ;
         }
     }
 }

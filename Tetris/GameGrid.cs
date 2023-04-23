@@ -8,6 +8,13 @@ namespace Tetris
         public int Rows { get;  }
         public int Columns { get;  }
 
+        // allow custom function of assignment 
+        public int this[int r, int c] 
+        {
+            get => grid[r, c];
+            set => grid[r, c] = value;
+        }
+
         public GameGrid(int rows, int columns)
         {
             Rows = rows;

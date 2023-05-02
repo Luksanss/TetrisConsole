@@ -1,7 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks.Dataflow;
+using System.IO;
+using System.Text;
 
 namespace Tetris
 {
@@ -47,12 +48,14 @@ namespace Tetris
                     }
                 }
                 while (Console.KeyAvailable)
-                    Console.ReadKey(false);
+                    Console.ReadKey(true);
                 game.MoveBlockDown();
                 scoreF = game.GameGrid.score;
                 Console.WriteLine($"     Score: {scoreF}");
             }
-            Console.WriteLine($"Game over, final score {scoreF}");
+            SaveHighScore(scoreF);
+            // Console.WriteLine($"Game over, final score {scoreF}");
+
         }
 
         public static void setRed() 
@@ -86,6 +89,54 @@ namespace Tetris
         public static void setDarkYellow()
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+        }
+
+        public static void SaveHighScore(int newScore) 
+        {
+            string fileName = "highScoreTetris.txt";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + fileName;
+
+            string s = "";
+            if (File.Exists(path))
+            {
+                // Open the stream and read it back.
+                using (StreamReader sr = File.OpenText(path))
+                {
+
+                    s = sr.ReadLine();
+                }
+            }
+            else
+            {
+                // Create the file
+                using (FileStream fs = File.Create(path))
+                {
+                    byte[] info = new UTF8Encoding(true).GetBytes($"{newScore}");
+                    // Add some information to the file.
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+
+            int result;
+            if (!int.TryParse(s, out result))
+            {
+                result = 0;
+            }
+            if (result < newScore)
+            {
+                Console.WriteLine("New high score!!");
+                Console.WriteLine($"Your score: {newScore}");
+                Console.WriteLine($"(previous score: {result})");
+                using (StreamWriter outputFile = new StreamWriter(path))
+                {
+                    outputFile.Write(newScore);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Your score: {newScore}");
+                Console.WriteLine($"High score: {result}");
+            }
         }
         public static void PrintGrid(int[,] gameGrid)
         {
@@ -258,8 +309,6 @@ namespace Tetris
                     Console.WriteLine("C# (dotnet 6.0)");
                 else if (i == 5)
                     Console.WriteLine("IDE Visual Studio 2022");
-                else if (i == 6)
-                    Console.WriteLine("ChatGPT 3");
                 else if (i == 10)
                     Console.WriteLine("Sources used: ");
                 else if (i == 12)
